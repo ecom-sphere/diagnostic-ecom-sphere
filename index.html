@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnostic E-commerce - CÃ©dric Anger | Ecom Sphere</title>
-    <meta name="description" content="Fais le diagnostic gratuit de ton projet e-commerce en 2 minutes. DÃ©couvre ton profil et ta prochaine Ã©tape concrÃ¨te.">
+    <title>Diagnostic E-commerce - Cédric Anger | Ecom Sphere</title>
+    <meta name="description" content="Fais le diagnostic gratuit de ton projet e-commerce en 2 minutes. Découvre ton profil et ta prochaine étape concrète.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -492,20 +492,20 @@
     <div class="container">
         <!-- HEADER -->
         <div class="header-badge">Diagnostic gratuit</div>
-        <h1>Ton projet e-commerce est-il prÃªt Ã  dÃ©coller ?</h1>
-        <p class="subtitle">RÃ©ponds Ã  7 questions en 2 minutes. DÃ©couvre ton profil et la prochaine Ã©tape concrÃ¨te pour avancer.</p>
+        <h1>Ton projet e-commerce est-il prêt à décoller ?</h1>
+        <p class="subtitle">Réponds à 7 questions en 2 minutes. Découvre ton profil et la prochaine étape concrète pour avancer.</p>
 
         <!-- INTRO -->
         <div id="intro-section">
             <div class="intro-card">
                 <div class="icon">&#x1F3AF;</div>
                 <h2>Diagnostic en 7 questions</h2>
-                <p>Ce quiz a Ã©tÃ© conÃ§u Ã  partir de l'accompagnement de +200 e-commerÃ§ants. Il identifie exactement oÃ¹ tu en es et ce qui te bloque.</p>
+                <p>Ce quiz a été conçu à partir de l'accompagnement de +200 e-commerçants. Il identifie exactement où tu en es et ce qui te bloque.</p>
 
                 <div class="stats-row">
                     <div class="stat">
                         <div class="num">2 min</div>
-                        <div class="label">Ã  complÃ©ter</div>
+                        <div class="label">à compléter</div>
                     </div>
                     <div class="stat">
                         <div class="num">3</div>
@@ -518,13 +518,13 @@
                 </div>
 
                 <div class="checklist">
-                    <div class="checklist-item"><span class="check-icon">&#x2705;</span> OÃ¹ tu en es vraiment dans ton projet</div>
-                    <div class="checklist-item"><span class="check-icon">&#x2705;</span> Ce qui te bloque (et tu ne le sais peut-Ãªtre pas)</div>
-                    <div class="checklist-item"><span class="check-icon">&#x2705;</span> La prochaine Ã©tape adaptÃ©e Ã  TON niveau</div>
+                    <div class="checklist-item"><span class="check-icon">&#x2705;</span> Où tu en es vraiment dans ton projet</div>
+                    <div class="checklist-item"><span class="check-icon">&#x2705;</span> Ce qui te bloque (et tu ne le sais peut-être pas)</div>
+                    <div class="checklist-item"><span class="check-icon">&#x2705;</span> La prochaine étape adaptée à TON niveau</div>
                 </div>
 
                 <button class="cta-primary" onclick="startQuiz()">Commencer le diagnostic &#x2192;</button>
-                <div class="trust-badge">&#x1F512; Gratuit, sans engagement, rÃ©sultats immÃ©diats</div>
+                <div class="trust-badge">&#x1F512; Gratuit, sans engagement, résultats immédiats</div>
             </div>
         </div>
 
@@ -544,12 +544,12 @@
         <div id="email-section" class="email-section">
             <div class="email-card">
                 <div class="icon">&#x1F4CA;</div>
-                <h2>Ton diagnostic est prÃªt !</h2>
-                <p>Entre ton prÃ©nom et ton email pour dÃ©couvrir ton profil, ton score dÃ©taillÃ© et ton plan d'action personnalisÃ©.</p>
-                <input type="text" id="user-firstname" class="email-input" placeholder="Ton prÃ©nom"><br>
+                <h2>Ton diagnostic est prêt !</h2>
+                <p>Entre ton prénom et ton email pour découvrir ton profil, ton score détaillé et ton plan d'action personnalisé.</p>
+                <input type="text" id="user-firstname" class="email-input" placeholder="Ton prénom"><br>
                 <input type="email" id="user-email" class="email-input" placeholder="Ton email">
-                <button class="cta-primary" onclick="submitEmail()">Voir mon rÃ©sultat &#x2192;</button>
-                <div class="trust-badge">&#x1F512; Tes donnÃ©es restent privÃ©es. ZÃ©ro spam, promis.</div>
+                <button class="cta-primary" onclick="submitEmail()">Voir mon résultat &#x2192;</button>
+                <div class="trust-badge">&#x1F512; Tes données restent privées. Zéro spam, promis.</div>
             </div>
         </div>
 
@@ -568,46 +568,46 @@
     const questions = [
         {
             id: 1,
-            question: "OÃ¹ en es-tu dans ton projet e-commerce ?",
-            subtitle: "Sois honnÃªte, c'est Ã§a qui rendra le diagnostic utile.",
+            question: "Où en es-tu dans ton projet e-commerce ?",
+            subtitle: "Sois honnête, c'est ça qui rendra le diagnostic utile.",
             options: [
-                { text: "J'ai juste l'idÃ©e de me lancer, je n'ai encore rien fait", points: 1 },
+                { text: "J'ai juste l'idée de me lancer, je n'ai encore rien fait", points: 1 },
                 { text: "J'ai choisi une niche mais je n'ai pas encore de boutique", points: 2 },
-                { text: "J'ai une boutique en ligne mais elle ne gÃ©nÃ¨re pas (ou peu) de ventes", points: 3 },
-                { text: "Je fais des ventes mais je veux scaler sÃ©rieusement", points: 4 }
+                { text: "J'ai une boutique en ligne mais elle ne génère pas (ou peu) de ventes", points: 3 },
+                { text: "Je fais des ventes mais je veux scaler sérieusement", points: 4 }
             ]
         },
         {
             id: 2,
             question: "Comment as-tu choisi (ou comptes-tu choisir) ta niche ?",
-            subtitle: "La mÃ©thode de sÃ©lection de niche est souvent le premier point de blocage.",
+            subtitle: "La méthode de sélection de niche est souvent le premier point de blocage.",
             options: [
                 { text: "J'ai vu des produits viraux sur TikTok et je veux copier", points: 1 },
-                { text: "J'ai une vague idÃ©e basÃ©e sur mes centres d'intÃ©rÃªt", points: 2 },
-                { text: "J'ai analysÃ© la demande, les marges et la concurrence", points: 3 },
-                { text: "J'ai dÃ©jÃ  validÃ© ma niche avec des ventes rÃ©elles", points: 4 }
+                { text: "J'ai une vague idée basée sur mes centres d'intérêt", points: 2 },
+                { text: "J'ai analysé la demande, les marges et la concurrence", points: 3 },
+                { text: "J'ai déjà validé ma niche avec des ventes réelles", points: 4 }
             ]
         },
         {
             id: 3,
-            question: "Quel est ton niveau en crÃ©ation de contenu (TikTok, Reels, Shorts) ?",
-            subtitle: "En 2026, le contenu organique est LE levier nÂ°1 en e-commerce.",
+            question: "Quel est ton niveau en création de contenu (TikTok, Reels, Shorts) ?",
+            subtitle: "En 2026, le contenu organique est LE levier n°1 en e-commerce.",
             options: [
-                { text: "Je n'ai jamais postÃ© de contenu pour mon business", points: 1 },
-                { text: "J'ai essayÃ© mais sans mÃ©thode ni rÃ©gularitÃ©", points: 2 },
-                { text: "Je poste rÃ©guliÃ¨rement mais mes rÃ©sultats sont moyens", points: 3 },
-                { text: "Mon contenu gÃ©nÃ¨re du trafic et des ventes", points: 4 }
+                { text: "Je n'ai jamais posté de contenu pour mon business", points: 1 },
+                { text: "J'ai essayé mais sans méthode ni régularité", points: 2 },
+                { text: "Je poste régulièrement mais mes résultats sont moyens", points: 3 },
+                { text: "Mon contenu génère du trafic et des ventes", points: 4 }
             ]
         },
         {
             id: 4,
-            question: "Combien de temps par jour peux-tu consacrer Ã  ton projet ?",
-            subtitle: "L'engagement est le facteur nÂ°1 de rÃ©ussite, pas le budget.",
+            question: "Combien de temps par jour peux-tu consacrer à ton projet ?",
+            subtitle: "L'engagement est le facteur n°1 de réussite, pas le budget.",
             options: [
-                { text: "Moins de 30 minutes, je suis trÃ¨s pris", points: 1 },
-                { text: "30 minutes Ã  1 heure par jour", points: 2 },
-                { text: "1 Ã  2 heures par jour, c'est ma prioritÃ©", points: 3 },
-                { text: "Plus de 2 heures par jour, je suis Ã  fond", points: 4 }
+                { text: "Moins de 30 minutes, je suis très pris", points: 1 },
+                { text: "30 minutes à 1 heure par jour", points: 2 },
+                { text: "1 à 2 heures par jour, c'est ma priorité", points: 3 },
+                { text: "Plus de 2 heures par jour, je suis à fond", points: 4 }
             ]
         },
         {
@@ -615,32 +615,32 @@
             question: "Quel est ton plus gros blocage aujourd'hui ?",
             subtitle: "Identifie ce qui te freine le plus en ce moment.",
             options: [
-                { text: "Je ne sais pas par oÃ¹ commencer ni quelle niche choisir", points: 1 },
-                { text: "J'ai du mal Ã  crÃ©er une boutique qui inspire confiance", points: 2 },
-                { text: "Je n'arrive pas Ã  gÃ©nÃ©rer du trafic vers ma boutique", points: 3 },
-                { text: "J'ai du trafic mais mes visiteurs n'achÃ¨tent pas", points: 4 }
+                { text: "Je ne sais pas par où commencer ni quelle niche choisir", points: 1 },
+                { text: "J'ai du mal à créer une boutique qui inspire confiance", points: 2 },
+                { text: "Je n'arrive pas à générer du trafic vers ma boutique", points: 3 },
+                { text: "J'ai du trafic mais mes visiteurs n'achètent pas", points: 4 }
             ]
         },
         {
             id: 6,
-            question: "As-tu dÃ©jÃ  investi dans une formation ou un accompagnement e-com ?",
-            subtitle: "Pas de jugement, Ã§a nous aide Ã  calibrer ton diagnostic.",
+            question: "As-tu déjà investi dans une formation ou un accompagnement e-com ?",
+            subtitle: "Pas de jugement, ça nous aide à calibrer ton diagnostic.",
             options: [
                 { text: "Non, j'ai appris avec du contenu gratuit (YouTube, etc.)", points: 1 },
-                { text: "Oui, une formation mais je ne l'ai pas terminÃ©e ou appliquÃ©e", points: 2 },
-                { text: "Oui, j'ai suivi une formation et appliquÃ© les bases", points: 3 },
+                { text: "Oui, une formation mais je ne l'ai pas terminée ou appliquée", points: 2 },
+                { text: "Oui, j'ai suivi une formation et appliqué les bases", points: 3 },
                 { text: "Oui, plusieurs, et je cherche maintenant un vrai cadre pour scaler", points: 4 }
             ]
         },
         {
             id: 7,
-            question: "Si tu pouvais avoir un rÃ©sultat dans les 90 prochains jours, ce serait quoi ?",
-            subtitle: "Ton objectif dÃ©termine la stratÃ©gie idÃ©ale.",
+            question: "Si tu pouvais avoir un résultat dans les 90 prochains jours, ce serait quoi ?",
+            subtitle: "Ton objectif détermine la stratégie idéale.",
             options: [
-                { text: "Comprendre les bases et lancer ma premiÃ¨re boutique", points: 1 },
-                { text: "Avoir une boutique en ligne qui tourne et gÃ©nÃ¨re mes premiÃ¨res ventes", points: 2 },
-                { text: "Atteindre un CA rÃ©gulier de 1 000 Ã  5 000 â¬/mois", points: 3 },
-                { text: "Passer au niveau supÃ©rieur : 5k-10k+/mois avec un systÃ¨me solide", points: 4 }
+                { text: "Comprendre les bases et lancer ma première boutique", points: 1 },
+                { text: "Avoir une boutique en ligne qui tourne et génère mes premières ventes", points: 2 },
+                { text: "Atteindre un CA régulier de 1 000 à 5 000 €/mois", points: 3 },
+                { text: "Passer au niveau supérieur : 5k-10k+/mois avec un système solide", points: 4 }
             ]
         }
     ];
@@ -720,7 +720,7 @@
         document.getElementById('email-section').style.display = 'none';
         document.getElementById('loading-section').classList.add('active');
 
-        // Envoi du contact via Netlify Function (proxy sÃ©curisÃ©)
+        // Envoi du contact via Netlify Function (proxy sécurisé)
         const profileData = getProfile();
         const tagMap = {
             'starter': 'quiz-explorateur',
@@ -757,50 +757,50 @@
                 id: 'starter',
                 class: 'profile-starter',
                 badge: 'Profil Explorateur',
-                title: 'Tu es en phase de dÃ©couverte',
-                description: "Tu as l'envie, c'est dÃ©jÃ  Ã©norme. Mais tu as besoin de poser des bases solides avant de te lancer. Le risque numÃ©ro 1 Ã  ton stade : foncer sans mÃ©thode et brÃ»ler ton Ã©nergie (et ton budget) sur les mauvaises choses.",
+                title: 'Tu es en phase de découverte',
+                description: "Tu as l'envie, c'est déjà énorme. Mais tu as besoin de poser des bases solides avant de te lancer. Le risque numéro 1 à ton stade : foncer sans méthode et brûler ton énergie (et ton budget) sur les mauvaises choses.",
                 items: [
-                    "Tu n'as pas encore validÃ© ta niche avec une mÃ©thode fiable",
-                    "Tu as besoin d'un cadre pour Ã©viter les erreurs classiques",
+                    "Tu n'as pas encore validé ta niche avec une méthode fiable",
+                    "Tu as besoin d'un cadre pour éviter les erreurs classiques",
                     "Le contenu organique est un levier que tu n'exploites pas encore"
                 ],
-                cta_text: "Rejoindre la communautÃ© Ecom Sphere",
+                cta_text: "Rejoindre la communauté Ecom Sphere",
                 cta_link: "https://www.skool.com/ecomsphere",
-                cta_sub: "Gratuit pour dÃ©marrer, tu pourras poser tes questions et avancer pas Ã  pas.",
+                cta_sub: "Gratuit pour démarrer, tu pourras poser tes questions et avancer pas à pas.",
                 dots_filled: 2
             };
         } else if (totalScore <= 19) {
             return {
                 id: 'ready',
                 class: 'profile-ready',
-                badge: 'Profil PrÃªt Ã  Lancer',
+                badge: 'Profil Prêt à Lancer',
                 title: 'Tu as les bases, il te manque le cadre',
-                description: "Tu n'es pas un dÃ©butant complet. Tu as dÃ©jÃ  rÃ©flÃ©chi, peut-Ãªtre lancÃ© quelque chose. Mais tu tournes en rond parce qu'il te manque une mÃ©thode structurÃ©e et quelqu'un pour te guider concrÃ¨tement. C'est exactement lÃ  que SystÃ¨me SphÃ¨re fait la diffÃ©rence.",
+                description: "Tu n'es pas un débutant complet. Tu as déjà réfléchi, peut-être lancé quelque chose. Mais tu tournes en rond parce qu'il te manque une méthode structurée et quelqu'un pour te guider concrètement. C'est exactement là que Système Sphère fait la différence.",
                 items: [
-                    "Tu as une idÃ©e ou une niche mais tu doutes de sa viabilitÃ©",
+                    "Tu as une idée ou une niche mais tu doutes de sa viabilité",
                     "Tu manques d'un plan d'action clair semaine par semaine",
-                    "Avec un cadre structurÃ© et un accompagnement, tu peux dÃ©bloquer tes premiers rÃ©sultats en 90 jours"
+                    "Avec un cadre structuré et un accompagnement, tu peux débloquer tes premiers résultats en 90 jours"
                 ],
-                cta_text: "RÃ©server mon appel stratÃ©gique gratuit",
+                cta_text: "Réserver mon appel stratégique gratuit",
                 cta_link: "https://calendly.com/d/cxnk-797-vhp/appel-strategique-ecom-sphere",
-                cta_sub: "30 min pour faire le point sur ton projet et voir si SystÃ¨me SphÃ¨re est fait pour toi.",
+                cta_sub: "30 min pour faire le point sur ton projet et voir si Système Sphère est fait pour toi.",
                 dots_filled: 5
             };
         } else {
             return {
                 id: 'scale',
                 class: 'profile-scale',
-                badge: 'Profil PrÃªt Ã  Scaler',
-                title: "Tu as le potentiel, il te faut l'accÃ©lÃ©ration",
-                description: "Tu n'es plus dÃ©butant. Tu fais des ventes ou tu as dÃ©jÃ  un systÃ¨me en place. Mais tu sens que tu as atteint un plafond. Pour passer au niveau supÃ©rieur, tu as besoin d'un accompagnement personnalisÃ© qui t'aide Ã  optimiser et scaler. SystÃ¨me SphÃ¨re a Ã©tÃ© crÃ©Ã© exactement pour ton profil.",
+                badge: 'Profil Prêt à Scaler',
+                title: "Tu as le potentiel, il te faut l'accélération",
+                description: "Tu n'es plus débutant. Tu fais des ventes ou tu as déjà un système en place. Mais tu sens que tu as atteint un plafond. Pour passer au niveau supérieur, tu as besoin d'un accompagnement personnalisé qui t'aide à optimiser et scaler. Système Sphère a été créé exactement pour ton profil.",
                 items: [
-                    "Tu gÃ©nÃ¨res dÃ©jÃ  du trafic ou des ventes mais tu veux multiplier tes rÃ©sultats",
-                    "Tu as besoin d'une stratÃ©gie de scaling (contenu + offre + conversion)",
-                    "Un accompagnement 1:1 peut te faire gagner des mois de tÃ¢tonnement"
+                    "Tu génères déjà du trafic ou des ventes mais tu veux multiplier tes résultats",
+                    "Tu as besoin d'une stratégie de scaling (contenu + offre + conversion)",
+                    "Un accompagnement 1:1 peut te faire gagner des mois de tâtonnement"
                 ],
-                cta_text: "RÃ©server mon appel stratÃ©gique gratuit",
+                cta_text: "Réserver mon appel stratégique gratuit",
                 cta_link: "https://calendly.com/d/cxnk-797-vhp/appel-strategique-ecom-sphere",
-                cta_sub: "Places limitÃ©es. On ne prend que les profils qu'on peut vraiment aider.",
+                cta_sub: "Places limitées. On ne prend que les profils qu'on peut vraiment aider.",
                 dots_filled: 7
             };
         }
@@ -822,7 +822,7 @@
 
         const guideLink = `
             <a href="https://drive.google.com/file/d/13xNvqW0NnAOq20b7I1vtdFPVAHc0fzm6/view?usp=sharing" class="guide-link" target="_blank">
-                &#x1F4D6; Tu n'as pas encore lu le guide gratuit ? TÃ©lÃ©charge-le ici
+                &#x1F4D6; Tu n'as pas encore lu le guide gratuit ? Télécharge-le ici
             </a>
         `;
 
@@ -833,7 +833,7 @@
                 <div class="score-visual">${dotsHTML}</div>
                 <p class="result-description">${profile.description}</p>
                 <div class="result-items">
-                    <h3>Ce que le diagnostic rÃ©vÃ¨le</h3>
+                    <h3>Ce que le diagnostic révèle</h3>
                     ${itemsHTML}
                 </div>
                 <a href="${profile.cta_link}" class="cta-primary" target="_blank">
@@ -842,7 +842,7 @@
                 <div style="font-size: 13px; color: #6a6a82; margin-top: 12px;">${profile.cta_sub}</div>
                 ${guideLink}
                 <div class="trust-line">
-                    <span>&#x1F3C6;</span> +200 e-commerÃ§ants accompagnÃ©s par CÃ©dric Anger
+                    <span>&#x1F3C6;</span> +200 e-commerçants accompagnés par Cédric Anger
                 </div>
             </div>
         `;
