@@ -1,5 +1,5 @@
 // Netlify Function - Proxy pour l'API systeme.io
-// L'API key est stockée en variable d'environnement (pas dans le code)
+// L'API key est stockee en variable d'environnement (pas dans le code)
 
 exports.handler = async (event) => {
     // CORS headers
@@ -31,17 +31,16 @@ exports.handler = async (event) => {
             return { statusCode: 400, headers, body: JSON.stringify({ error: 'Email and firstname required' }) };
         }
 
-        // Créer le contact
+        let contactId = null;
+
+        // Etape 1 : Creer le contact (sans tags - l'API ne les supporte pas a la creation)
         const contactData = {
             email: email,
-            fields: [{ slug: 'first_name', value: firstname }],
-            tags: [
-                { name: 'quiz-diagnostic-ecom' },
-                { name: tag || 'quiz-diagnostic-ecom' }
-            ]
+            fields: [{ slug: 'first_name', value: firstname }]
         };
 
-        const response = await fetch('https://api.systeme.io/api/contacts', {
+        console.log('Creating contact:', email);
+        const createRes = await fetch('https://api.systeme.io/api/contacts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,46 +49,58 @@ exports.handler = async (event) => {
             body: JSON.stringify(contactData)
         });
 
-        // Si le contact existe déjà (422), on ajoute le tag
-        if (response.status === 422) {
-            console.log('Contact existe déjà, ajout du tag...');
-
+        if (createRes.status === 201 || createRes.status === 200) {
+            const createData = await createRes.json();
+            contactId = createData.id;
+            console.log('Contact created, ID:', contactId);
+        } else if (createRes.status === 422) {
+            console.log('Contact already exists, searching...');
             const searchRes = await fetch(
-                `https://api.systeme.io/api/contacts?email=${encodeURIComponent(email)}`,
+                'https://api.systeme.io/api/contacts?email=' + encodeURIComponent(email),
                 { headers: { 'X-API-Key': API_KEY } }
             );
             const searchData = await searchRes.json();
+            if (searchData.items && searchData.items.length > 0) {
+                contactId = searchData.items[0].id;
+                console.log('Found existing contact, ID:', contactId);
+            }
+        } else {
+            const errText = await createRes.text();
+            console.error('Create contact error:', createRes.status, errText);
+            throw new Error('Create contact failed: ' + createRes.status);
+        }
 
-            if (searchData.items && searchData.items[0]) {
-                const contactId = searchData.items[0].id;
+        // Etape 2 : Ajouter les tags (appel separe - OBLIGATOIRE)
+        if (contactId) {
+            const tagsToAdd = ['quiz-diagnostic-ecom'];
+            if (tag && tag !== 'quiz-diagnostic-ecom') {
+                tagsToAdd.push(tag);
+            }
 
-                await fetch(`https://api.systeme.io/api/contacts/${contactId}/tags`, {
+            for (const tagName of tagsToAdd) {
+                console.log('Adding tag ' + tagName + ' to contact ' + contactId);
+                const tagRes = await fetch('https://api.systeme.io/api/contacts/' + contactId + '/tags', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-API-Key': API_KEY
                     },
-                    body: JSON.stringify({ tag: { name: tag } })
+                    body: JSON.stringify({ name: tagName })
                 });
 
-                return {
-                    statusCode: 200,
-                    headers,
-                    body: JSON.stringify({ success: true, message: 'Tag added to existing contact' })
-                };
+                if (tagRes.ok) {
+                    console.log('Tag ' + tagName + ' added successfully');
+                } else {
+                    const tagErr = await tagRes.text();
+                    console.error('Tag ' + tagName + ' error:', tagRes.status, tagErr);
+                }
             }
         }
-
-        if (!response.ok && response.status !== 422) {
-            throw new Error(`API error: ${response.status}`);
-        }
-
-        const data = await response.json().catch(() => ({}));
 
         return {
             statusCode: 200,
             headers,
-            body: JSON.stringify({ success: true, data })
+            body: JSON.stringify({ success: true, contactId: contactId, tags: tag })
         };
 
     } catch (error) {
