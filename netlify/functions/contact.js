@@ -32,8 +32,12 @@ exports.handler = async (event) => {
         }
 
         let contactId = null;
+        const apiHeaders = {
+            'Content-Type': 'application/json',
+            'X-API-Key': API_KEY
+        };
 
-        // Etape 1 : Creer le contact (sans tags - l'API ne les supporte pas a la creation)
+        // Etape 1 : Creer le contact
         const contactData = {
             email: email,
             fields: [{ slug: 'first_name', value: firstname }]
@@ -42,10 +46,7 @@ exports.handler = async (event) => {
         console.log('Creating contact:', email);
         const createRes = await fetch('https://api.systeme.io/api/contacts', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-API-Key': API_KEY
-            },
+            headers: apiHeaders,
             body: JSON.stringify(contactData)
         });
 
@@ -70,7 +71,7 @@ exports.handler = async (event) => {
             throw new Error('Create contact failed: ' + createRes.status);
         }
 
-        // Etape 2 : Ajouter les tags (appel separe - OBLIGATOIRE)
+        // Etape 2 : Creer les tags puis les assigner au contact
         if (contactId) {
             const tagsToAdd = ['quiz-diagnostic-ecom'];
             if (tag && tag !== 'quiz-diagnostic-ecom') {
@@ -78,21 +79,62 @@ exports.handler = async (event) => {
             }
 
             for (const tagName of tagsToAdd) {
-                console.log('Adding tag ' + tagName + ' to contact ' + contactId);
-                const tagRes = await fetch('https://api.systeme.io/api/contacts/' + contactId + '/tags', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-API-Key': API_KEY
-                    },
-                    body: JSON.stringify({ name: tagName })
-                });
+                try {
+                    // D'abord creer le tag (ou recuperer son ID s'il existe deja)
+                    console.log('Creating/getting tag: ' + tagName);
+                    let tagId = null;
 
-                if (tagRes.ok) {
-                    console.log('Tag ' + tagName + ' added successfully');
-                } else {
-                    const tagErr = await tagRes.text();
-                    console.error('Tag ' + tagName + ' error:', tagRes.status, tagErr);
+                    // Essayer de creer le tag
+                    const createTagRes = await fetch('https://api.systeme.io/api/tags', {
+                        method: 'POST',
+                        headers: apiHeaders,
+                        body: JSON.stringify({ name: tagName })
+                    });
+
+                    if (createTagRes.ok) {
+                        const tagData = await createTagRes.json();
+                        tagId = tagData.id;
+                        console.log('Tag created, ID:', tagId);
+                    } else {
+                        // Le tag existe probablement deja, on le cherche
+                        console.log('Tag might exist, searching...');
+                        const listTagsRes = await fetch(
+                            'https://api.systeme.io/api/tags?name=' + encodeURIComponent(tagName),
+                            { headers: { 'X-API-Key': API_KEY } }
+                        );
+                        if (listTagsRes.ok) {
+                            const tagsData = await listTagsRes.json();
+                            if (tagsData.items && tagsData.items.length > 0) {
+                                // Chercher le tag exact
+                                const found = tagsData.items.find(function(t) { return t.name === tagName; });
+                                if (found) {
+                                    tagId = found.id;
+                                    console.log('Found existing tag, ID:', tagId);
+                                }
+                            }
+                        }
+                    }
+
+                    // Assigner le tag au contact avec son tagId
+                    if (tagId) {
+                        console.log('Assigning tag ' + tagId + ' (' + tagName + ') to contact ' + contactId);
+                        const assignRes = await fetch('https://api.systeme.io/api/contacts/' + contactId + '/tags', {
+                            method: 'POST',
+                            headers: apiHeaders,
+                            body: JSON.stringify({ tagId: tagId })
+                        });
+
+                        if (assignRes.ok) {
+                            console.log('Tag ' + tagName + ' assigned successfully');
+                        } else {
+                            const assignErr = await assignRes.text();
+                            console.error('Assign tag error:', assignRes.status, assignErr);
+                        }
+                    } else {
+                        console.error('Could not find or create tag: ' + tagName);
+                    }
+                } catch (tagError) {
+                    console.error('Tag processing error for ' + tagName + ':', tagError.message);
                 }
             }
         }
@@ -112,3 +154,4 @@ exports.handler = async (event) => {
         };
     }
 };
+
