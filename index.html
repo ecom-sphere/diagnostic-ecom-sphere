@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic E-commerce - CÃ©dric Anger | Ecom Sphere</title>
+    <meta name="description" content="Fais le diagnostic gratuit de ton projet e-commerce en 2 minutes. DÃ©couvre ton profil et ta prochaine Ã©tape concrÃ¨te.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a1a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 680px;
+            width: 100%;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* ===== HEADER ===== */
+        .header-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #8888a8;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        /* ===== INTRO CARD ===== */
+        .intro-card {
+            background: linear-gradient(145deg, rgba(30, 30, 60, 0.8), rgba(20, 20, 45, 0.9));
+            border: 1px solid rgba(80, 80, 140, 0.2);
+            border-radius: 16px;
+            padding: 40px 32px;
+            margin-bottom: 24px;
+        }
+
+        .intro-card .icon { font-size: 36px; margin-bottom: 16px; }
+
+        .intro-card h2 {
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .intro-card p {
+            font-size: 14px;
+            color: #8888a8;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 28px;
+        }
+
+        .stat { text-align: center; }
+
+        .stat .num {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #818cf8;
+        }
+
+        .stat .label {
+            font-size: 12px;
+            color: #6a6a82;
+        }
+
+        .checklist {
+            text-align: left;
+            margin: 0 auto;
+            max-width: 400px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: #b0b0c8;
+        }
+
+        .checklist-item .check-icon {
+            font-size: 16px;
+        }
+
+        /* ===== CTA BUTTON ===== */
+        .cta-primary {
+            display: inline-block;
+            width: 100%;
+            max-width: 420px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .cta-primary:hover {
+            background: linear-gradient(135deg, #4338ca, #4f46e5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(79, 70, 229, 0.3);
+        }
+
+        .trust-badge {
+            font-size: 12px;
+            color: #6a6a82;
+            margin-top: 12px;
+        }
+
+        /* ===== QUIZ ===== */
+        .quiz-section { display: none; }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .progress-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #818cf8;
+        }
+
+        .progress-time {
+            font-size: 13px;
+            color: #6a6a82;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 4px;
+            background: rgba(80, 80, 140, 0.2);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4f46e5, #818cf8);
+            border-radius: 2px;
+            transition: width 0.4s ease;
+        }
+
+        .question-card {
+            background: linear-gradient(145deg, rgba(30, 30, 60, 0.8), rgba(20, 20, 45, 0.9));
+            border: 1px solid rgba(80, 80, 140, 0.2);
+            border-radius: 16px;
+            padding: 32px 28px;
+            text-align: left;
+        }
+
+        .question-number {
+            font-size: 12px;
+            font-weight: 600;
+            color: #818cf8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .question-subtitle {
+            font-size: 13px;
+            color: #6a6a82;
+            margin-bottom: 24px;
+        }
+
+        .options-list { display: flex; flex-direction: column; gap: 10px; }
+
+        .option-btn {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            background: rgba(20, 20, 45, 0.6);
+            border: 1px solid rgba(80, 80, 140, 0.15);
+            border-radius: 12px;
+            color: #c0c0d8;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            width: 100%;
+        }
+
+        .option-btn:hover {
+            background: rgba(79, 70, 229, 0.15);
+            border-color: rgba(79, 70, 229, 0.3);
+        }
+
+        .option-btn.selected {
+            background: rgba(79, 70, 229, 0.25);
+            border-color: #4f46e5;
+            color: white;
+        }
+
+        .option-letter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(79, 70, 229, 0.2);
+            color: #818cf8;
+            font-weight: 700;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .option-btn.selected .option-letter {
+            background: #4f46e5;
+            color: white;
+        }
+
+        /* ===== EMAIL CAPTURE ===== */
+        .email-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .email-section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .email-card {
+            background: linear-gradient(145deg, rgba(30, 30, 60, 0.8), rgba(20, 20, 45, 0.9));
+            border: 1px solid rgba(80, 80, 140, 0.2);
+            border-radius: 16px;
+            padding: 40px 32px;
+        }
+
+        .email-card .icon { font-size: 36px; margin-bottom: 16px; }
+
+        .email-card h2 {
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .email-card p {
+            font-size: 14px;
+            color: #8888a8;
+            margin-bottom: 24px;
+        }
+
+        .email-input {
+            width: 100%;
+            max-width: 380px;
+            padding: 14px 18px;
+            background: rgba(15, 15, 35, 0.8);
+            border: 1px solid rgba(80, 80, 140, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+            margin-bottom: 12px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .email-input::placeholder { color: #5a5a78; }
+        .email-input:focus { border-color: #4f46e5; }
+
+        /* ===== LOADING ===== */
+        .loading-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .loading-section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .loading-text {
+            font-size: 15px;
+            color: #818cf8;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(79, 70, 229, 0.2);
+            border-top-color: #4f46e5;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ===== RESULT ===== */
+        .result-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .result-section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .result-card {
+            background: linear-gradient(145deg, rgba(30, 30, 60, 0.8), rgba(20, 20, 45, 0.9));
+            border: 1px solid rgba(80, 80, 140, 0.2);
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-align: center;
+        }
+
+        .result-profile-badge {
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .profile-starter .result-profile-badge {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .profile-ready .result-profile-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .profile-scale .result-profile-badge {
+            background: rgba(79, 70, 229, 0.15);
+            color: #818cf8;
+            border: 1px solid rgba(79, 70, 229, 0.3);
+        }
+
+        .result-card h2 {
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .score-visual {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .score-dot {
+            width: 36px;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(80, 80, 140, 0.2);
+        }
+
+        .score-dot.filled {
+            background: linear-gradient(90deg, #4f46e5, #818cf8);
+        }
+
+        .result-description {
+            font-size: 14px;
+            color: #8888a8;
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .result-items {
+            background: rgba(15, 15, 35, 0.5);
+            border: 1px solid rgba(80, 80, 140, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: left;
+            margin-bottom: 28px;
+        }
+
+        .result-items h3 {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6a6a82;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: #b0b0c8;
+        }
+
+        .result-item-icon { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+
+        .result-card .cta-primary {
+            margin-top: 0;
+        }
+
+        .trust-line {
+            font-size: 13px;
+            color: #6a6a82;
+            margin-top: 16px;
+        }
+
+        .guide-link {
+            display: block;
+            margin-top: 20px;
+            padding: 14px 24px;
+            background: rgba(79, 70, 229, 0.1);
+            border: 1px solid rgba(79, 70, 229, 0.2);
+            border-radius: 10px;
+            color: #818cf8;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .guide-link:hover {
+            background: rgba(79, 70, 229, 0.2);
+            border-color: rgba(79, 70, 229, 0.4);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            h1 { font-size: 1.6rem; }
+            .stats-row { gap: 24px; }
+            .stat .num { font-size: 1.3rem; }
+            .intro-card, .question-card, .email-card, .result-card { padding: 28px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header-badge">Diagnostic gratuit</div>
+        <h1>Ton projet e-commerce est-il prÃªt Ã  dÃ©coller ?</h1>
+        <p class="subtitle">RÃ©ponds Ã  7 questions en 2 minutes. DÃ©couvre ton profil et la prochaine Ã©tape concrÃ¨te pour avancer.</p>
+
+        <!-- INTRO -->
+        <div id="intro-section">
+            <div class="intro-card">
+                <div class="icon">&#x1F3AF;</div>
+                <h2>Diagnostic en 7 questions</h2>
+                <p>Ce quiz a Ã©tÃ© conÃ§u Ã  partir de l'accompagnement de +200 e-commerÃ§ants. Il identifie exactement oÃ¹ tu en es et ce qui te bloque.</p>
+
+                <div class="stats-row">
+                    <div class="stat">
+                        <div class="num">2 min</div>
+                        <div class="label">Ã  complÃ©ter</div>
+                    </div>
+                    <div class="stat">
+                        <div class="num">3</div>
+                        <div class="label">profils possibles</div>
+                    </div>
+                    <div class="stat">
+                        <div class="num">1</div>
+                        <div class="label">plan d'action clair</div>
+                    </div>
+                </div>
+
+                <div class="checklist">
+                    <div class="checklist-item"><span class="check-icon">&#x2705;</span> OÃ¹ tu en es vraiment dans ton projet</div>
+                    <div class="checklist-item"><span class="check-icon">&#x2705;</span> Ce qui te bloque (et tu ne le sais peut-Ãªtre pas)</div>
+                    <div class="checklist-item"><span class="check-icon">&#x2705;</span> La prochaine Ã©tape adaptÃ©e Ã  TON niveau</div>
+                </div>
+
+                <button class="cta-primary" onclick="startQuiz()">Commencer le diagnostic &#x2192;</button>
+                <div class="trust-badge">&#x1F512; Gratuit, sans engagement, rÃ©sultats immÃ©diats</div>
+            </div>
+        </div>
+
+        <!-- QUIZ -->
+        <div id="quiz-section" class="quiz-section">
+            <div class="progress-bar">
+                <span id="progress-label" class="progress-label">Question 1 / 7</span>
+                <span class="progress-time">~2 min</span>
+            </div>
+            <div class="progress-track">
+                <div id="progress-fill" class="progress-fill" style="width: 14.3%"></div>
+            </div>
+            <div id="question-container" style="margin-top: 24px;"></div>
+        </div>
+
+        <!-- EMAIL CAPTURE -->
+        <div id="email-section" class="email-section">
+            <div class="email-card">
+                <div class="icon">&#x1F4CA;</div>
+                <h2>Ton diagnostic est prÃªt !</h2>
+                <p>Entre ton prÃ©nom et ton email pour dÃ©couvrir ton profil, ton score dÃ©taillÃ© et ton plan d'action personnalisÃ©.</p>
+                <input type="text" id="user-firstname" class="email-input" placeholder="Ton prÃ©nom"><br>
+                <input type="email" id="user-email" class="email-input" placeholder="Ton email">
+                <button class="cta-primary" onclick="submitEmail()">Voir mon rÃ©sultat &#x2192;</button>
+                <div class="trust-badge">&#x1F512; Tes donnÃ©es restent privÃ©es. ZÃ©ro spam, promis.</div>
+            </div>
+        </div>
+
+        <!-- LOADING -->
+        <div id="loading-section" class="loading-section" style="padding-top: 80px;">
+            <div class="spinner"></div>
+            <p class="loading-text">Analyse de ton profil en cours...</p>
+        </div>
+
+        <!-- RESULT -->
+        <div id="result-section" class="result-section"></div>
+    </div>
+
+    <script>
+    // ===== QUIZ DATA =====
+    const questions = [
+        {
+            id: 1,
+            question: "OÃ¹ en es-tu dans ton projet e-commerce ?",
+            subtitle: "Sois honnÃªte, c'est Ã§a qui rendra le diagnostic utile.",
+            options: [
+                { text: "J'ai juste l'idÃ©e de me lancer, je n'ai encore rien fait", points: 1 },
+                { text: "J'ai choisi une niche mais je n'ai pas encore de boutique", points: 2 },
+                { text: "J'ai une boutique en ligne mais elle ne gÃ©nÃ¨re pas (ou peu) de ventes", points: 3 },
+                { text: "Je fais des ventes mais je veux scaler sÃ©rieusement", points: 4 }
+            ]
+        },
+        {
+            id: 2,
+            question: "Comment as-tu choisi (ou comptes-tu choisir) ta niche ?",
+            subtitle: "La mÃ©thode de sÃ©lection de niche est souvent le premier point de blocage.",
+            options: [
+                { text: "J'ai vu des produits viraux sur TikTok et je veux copier", points: 1 },
+                { text: "J'ai une vague idÃ©e basÃ©e sur mes centres d'intÃ©rÃªt", points: 2 },
+                { text: "J'ai analysÃ© la demande, les marges et la concurrence", points: 3 },
+                { text: "J'ai dÃ©jÃ  validÃ© ma niche avec des ventes rÃ©elles", points: 4 }
+            ]
+        },
+        {
+            id: 3,
+            question: "Quel est ton niveau en crÃ©ation de contenu (TikTok, Reels, Shorts) ?",
+            subtitle: "En 2026, le contenu organique est LE levier nÂ°1 en e-commerce.",
+            options: [
+                { text: "Je n'ai jamais postÃ© de contenu pour mon business", points: 1 },
+                { text: "J'ai essayÃ© mais sans mÃ©thode ni rÃ©gularitÃ©", points: 2 },
+                { text: "Je poste rÃ©guliÃ¨rement mais mes rÃ©sultats sont moyens", points: 3 },
+                { text: "Mon contenu gÃ©nÃ¨re du trafic et des ventes", points: 4 }
+            ]
+        },
+        {
+            id: 4,
+            question: "Combien de temps par jour peux-tu consacrer Ã  ton projet ?",
+            subtitle: "L'engagement est le facteur nÂ°1 de rÃ©ussite, pas le budget.",
+            options: [
+                { text: "Moins de 30 minutes, je suis trÃ¨s pris", points: 1 },
+                { text: "30 minutes Ã  1 heure par jour", points: 2 },
+                { text: "1 Ã  2 heures par jour, c'est ma prioritÃ©", points: 3 },
+                { text: "Plus de 2 heures par jour, je suis Ã  fond", points: 4 }
+            ]
+        },
+        {
+            id: 5,
+            question: "Quel est ton plus gros blocage aujourd'hui ?",
+            subtitle: "Identifie ce qui te freine le plus en ce moment.",
+            options: [
+                { text: "Je ne sais pas par oÃ¹ commencer ni quelle niche choisir", points: 1 },
+                { text: "J'ai du mal Ã  crÃ©er une boutique qui inspire confiance", points: 2 },
+                { text: "Je n'arrive pas Ã  gÃ©nÃ©rer du trafic vers ma boutique", points: 3 },
+                { text: "J'ai du trafic mais mes visiteurs n'achÃ¨tent pas", points: 4 }
+            ]
+        },
+        {
+            id: 6,
+            question: "As-tu dÃ©jÃ  investi dans une formation ou un accompagnement e-com ?",
+            subtitle: "Pas de jugement, Ã§a nous aide Ã  calibrer ton diagnostic.",
+            options: [
+                { text: "Non, j'ai appris avec du contenu gratuit (YouTube, etc.)", points: 1 },
+                { text: "Oui, une formation mais je ne l'ai pas terminÃ©e ou appliquÃ©e", points: 2 },
+                { text: "Oui, j'ai suivi une formation et appliquÃ© les bases", points: 3 },
+                { text: "Oui, plusieurs, et je cherche maintenant un vrai cadre pour scaler", points: 4 }
+            ]
+        },
+        {
+            id: 7,
+            question: "Si tu pouvais avoir un rÃ©sultat dans les 90 prochains jours, ce serait quoi ?",
+            subtitle: "Ton objectif dÃ©termine la stratÃ©gie idÃ©ale.",
+            options: [
+                { text: "Comprendre les bases et lancer ma premiÃ¨re boutique", points: 1 },
+                { text: "Avoir une boutique en ligne qui tourne et gÃ©nÃ¨re mes premiÃ¨res ventes", points: 2 },
+                { text: "Atteindre un CA rÃ©gulier de 1 000 Ã  5 000 â¬/mois", points: 3 },
+                { text: "Passer au niveau supÃ©rieur : 5k-10k+/mois avec un systÃ¨me solide", points: 4 }
+            ]
+        }
+    ];
+
+    // ===== STATE =====
+    let currentQuestion = 0;
+    let answers = [];
+    let totalScore = 0;
+
+    // ===== FUNCTIONS =====
+    function startQuiz() {
+        document.getElementById('intro-section').classList.add('hidden');
+        document.getElementById('intro-section').style.display = 'none';
+        document.getElementById('quiz-section').style.display = 'block';
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        const q = questions[currentQuestion];
+        const letters = ['A', 'B', 'C', 'D'];
+
+        const html = `
+            <div class="question-card" key="${q.id}">
+                <div class="question-number">Question ${q.id}</div>
+                <div class="question-text">${q.question}</div>
+                <div class="question-subtitle">${q.subtitle}</div>
+                <div class="options-list">
+                    ${q.options.map((opt, i) => `
+                        <button class="option-btn" onclick="selectOption(${i}, ${opt.points})">
+                            <span class="option-letter">${letters[i]}</span>
+                            <span>${opt.text}</span>
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        document.getElementById('question-container').innerHTML = html;
+        document.getElementById('progress-label').textContent = `Question ${currentQuestion + 1} / 7`;
+        document.getElementById('progress-fill').style.width = `${((currentQuestion + 1) / 7) * 100}%`;
+    }
+
+    function selectOption(index, points) {
+        const btns = document.querySelectorAll('.option-btn');
+        btns.forEach(b => b.classList.remove('selected'));
+        btns[index].classList.add('selected');
+
+        answers.push(points);
+        totalScore += points;
+
+        setTimeout(() => {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                renderQuestion();
+            } else {
+                showEmailCapture();
+            }
+        }, 400);
+    }
+
+    function showEmailCapture() {
+        document.getElementById('quiz-section').style.display = 'none';
+        document.getElementById('email-section').classList.add('active');
+    }
+
+    function submitEmail() {
+        const firstname = document.getElementById('user-firstname').value.trim();
+        const email = document.getElementById('user-email').value.trim();
+
+        if (!firstname || !email || !email.includes('@')) {
+            document.getElementById('user-email').style.borderColor = 'rgba(239, 68, 68, 0.5)';
+            return;
+        }
+
+        // Hide email, show loading
+        document.getElementById('email-section').classList.remove('active');
+        document.getElementById('email-section').style.display = 'none';
+        document.getElementById('loading-section').classList.add('active');
+
+        // Envoi du contact via Netlify Function (proxy sÃ©curisÃ©)
+        const profileData = getProfile();
+        const tagMap = {
+            'starter': 'quiz-explorateur',
+            'ready': 'quiz-pret-a-lancer',
+            'scale': 'quiz-pret-a-scaler'
+        };
+
+        fetch('/.netlify/functions/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: email,
+                firstname: firstname,
+                tag: tagMap[profileData.id] || 'quiz-diagnostic-ecom'
+            })
+        })
+        .then(r => r.json())
+        .then(data => console.log('Contact OK:', data))
+        .catch(err => console.error('Erreur contact:', err));
+
+        console.log('Quiz data:', { firstname, email, score: totalScore, answers, profile: profileData.id });
+
+        setTimeout(() => {
+            document.getElementById('loading-section').classList.remove('active');
+            document.getElementById('loading-section').style.display = 'none';
+            showResult(firstname);
+        }, 2200);
+    }
+
+    function getProfile() {
+        // Score range: 7 (all 1s) to 28 (all 4s)
+        if (totalScore <= 12) {
+            return {
+                id: 'starter',
+                class: 'profile-starter',
+                badge: 'Profil Explorateur',
+                title: 'Tu es en phase de dÃ©couverte',
+                description: "Tu as l'envie, c'est dÃ©jÃ  Ã©norme. Mais tu as besoin de poser des bases solides avant de te lancer. Le risque numÃ©ro 1 Ã  ton stade : foncer sans mÃ©thode et brÃ»ler ton Ã©nergie (et ton budget) sur les mauvaises choses.",
+                items: [
+                    "Tu n'as pas encore validÃ© ta niche avec une mÃ©thode fiable",
+                    "Tu as besoin d'un cadre pour Ã©viter les erreurs classiques",
+                    "Le contenu organique est un levier que tu n'exploites pas encore"
+                ],
+                cta_text: "Rejoindre la communautÃ© Ecom Sphere",
+                cta_link: "https://www.skool.com/ecomsphere",
+                cta_sub: "Gratuit pour dÃ©marrer, tu pourras poser tes questions et avancer pas Ã  pas.",
+                dots_filled: 2
+            };
+        } else if (totalScore <= 19) {
+            return {
+                id: 'ready',
+                class: 'profile-ready',
+                badge: 'Profil PrÃªt Ã  Lancer',
+                title: 'Tu as les bases, il te manque le cadre',
+                description: "Tu n'es pas un dÃ©butant complet. Tu as dÃ©jÃ  rÃ©flÃ©chi, peut-Ãªtre lancÃ© quelque chose. Mais tu tournes en rond parce qu'il te manque une mÃ©thode structurÃ©e et quelqu'un pour te guider concrÃ¨tement. C'est exactement lÃ  que SystÃ¨me SphÃ¨re fait la diffÃ©rence.",
+                items: [
+                    "Tu as une idÃ©e ou une niche mais tu doutes de sa viabilitÃ©",
+                    "Tu manques d'un plan d'action clair semaine par semaine",
+                    "Avec un cadre structurÃ© et un accompagnement, tu peux dÃ©bloquer tes premiers rÃ©sultats en 90 jours"
+                ],
+                cta_text: "RÃ©server mon appel stratÃ©gique gratuit",
+                cta_link: "https://calendly.com/d/cxnk-797-vhp/appel-strategique-ecom-sphere",
+                cta_sub: "30 min pour faire le point sur ton projet et voir si SystÃ¨me SphÃ¨re est fait pour toi.",
+                dots_filled: 5
+            };
+        } else {
+            return {
+                id: 'scale',
+                class: 'profile-scale',
+                badge: 'Profil PrÃªt Ã  Scaler',
+                title: "Tu as le potentiel, il te faut l'accÃ©lÃ©ration",
+                description: "Tu n'es plus dÃ©butant. Tu fais des ventes ou tu as dÃ©jÃ  un systÃ¨me en place. Mais tu sens que tu as atteint un plafond. Pour passer au niveau supÃ©rieur, tu as besoin d'un accompagnement personnalisÃ© qui t'aide Ã  optimiser et scaler. SystÃ¨me SphÃ¨re a Ã©tÃ© crÃ©Ã© exactement pour ton profil.",
+                items: [
+                    "Tu gÃ©nÃ¨res dÃ©jÃ  du trafic ou des ventes mais tu veux multiplier tes rÃ©sultats",
+                    "Tu as besoin d'une stratÃ©gie de scaling (contenu + offre + conversion)",
+                    "Un accompagnement 1:1 peut te faire gagner des mois de tÃ¢tonnement"
+                ],
+                cta_text: "RÃ©server mon appel stratÃ©gique gratuit",
+                cta_link: "https://calendly.com/d/cxnk-797-vhp/appel-strategique-ecom-sphere",
+                cta_sub: "Places limitÃ©es. On ne prend que les profils qu'on peut vraiment aider.",
+                dots_filled: 7
+            };
+        }
+    }
+
+    function showResult(firstname) {
+        const profile = getProfile();
+
+        const dotsHTML = Array(7).fill(0).map((_, i) =>
+            `<div class="score-dot ${i < profile.dots_filled ? 'filled' : ''}"></div>`
+        ).join('');
+
+        const itemsHTML = profile.items.map(item =>
+            `<div class="result-item">
+                <span class="result-item-icon">&#x27A1;&#xFE0F;</span>
+                <span>${item}</span>
+            </div>`
+        ).join('');
+
+        const guideLink = `
+            <a href="https://drive.google.com/file/d/13xNvqW0NnAOq20b7I1vtdFPVAHc0fzm6/view?usp=sharing" class="guide-link" target="_blank">
+                &#x1F4D6; Tu n'as pas encore lu le guide gratuit ? TÃ©lÃ©charge-le ici
+            </a>
+        `;
+
+        const html = `
+            <div class="result-card ${profile.class}">
+                <div class="result-profile-badge">${profile.badge}</div>
+                <h2>${firstname}, ${profile.title}</h2>
+                <div class="score-visual">${dotsHTML}</div>
+                <p class="result-description">${profile.description}</p>
+                <div class="result-items">
+                    <h3>Ce que le diagnostic rÃ©vÃ¨le</h3>
+                    ${itemsHTML}
+                </div>
+                <a href="${profile.cta_link}" class="cta-primary" target="_blank">
+                    ${profile.cta_text} &#x2192;
+                </a>
+                <div style="font-size: 13px; color: #6a6a82; margin-top: 12px;">${profile.cta_sub}</div>
+                ${guideLink}
+                <div class="trust-line">
+                    <span>&#x1F3C6;</span> +200 e-commerÃ§ants accompagnÃ©s par CÃ©dric Anger
+                </div>
+            </div>
+        `;
+
+        document.getElementById('result-section').innerHTML = html;
+        document.getElementById('result-section').classList.add('active');
+    }
+    </script>
+</body>
+</html>
