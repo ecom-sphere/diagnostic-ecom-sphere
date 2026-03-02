@@ -2,8 +2,11 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnostic E-commerce - Cédric Anger | Ecom Sphere</title>
+    <title>Diagnostic E-commerce | Speed Ecom</title>
     <style>
         * {
             margin: 0;
@@ -12,8 +15,8 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a1a;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0e1a;
             color: #e0e0e0;
             min-height: 100vh;
             display: flex;
@@ -32,7 +35,7 @@
             transform: translateX(-50%);
             width: 700px;
             height: 700px;
-            background: radial-gradient(circle, rgba(79, 70, 229, 0.10) 0%, transparent 65%);
+            background: radial-gradient(circle, rgba(232, 168, 0, 0.08) 0%, transparent 65%);
             pointer-events: none;
             z-index: 0;
         }
@@ -44,7 +47,7 @@
             right: -150px;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.07) 0%, transparent 65%);
+            background: radial-gradient(circle, rgba(232, 168, 0, 0.05) 0%, transparent 65%);
             pointer-events: none;
             z-index: 0;
         }
@@ -55,7 +58,7 @@
             left: -150px;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(49, 46, 129, 0.08) 0%, transparent 65%);
+            background: radial-gradient(circle, rgba(232, 168, 0, 0.06) 0%, transparent 65%);
             pointer-events: none;
             z-index: 0;
         }
@@ -73,30 +76,19 @@
         .brand-logo {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
             text-decoration: none;
+            opacity: 0.92;
+            transition: opacity 0.2s;
         }
 
-        .brand-logo-icon {
-            width: 34px;
+        .brand-logo:hover {
+            opacity: 1;
+        }
+
+        .brand-logo-img {
             height: 34px;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .brand-logo-text {
-            font-size: 17px;
-            font-weight: 700;
-            color: white;
-            letter-spacing: -0.3px;
-        }
-
-        .brand-logo-text span {
-            color: #818cf8;
+            width: auto;
+            object-fit: contain;
         }
 
         /* ===== MAIN CONTAINER ===== */
@@ -112,7 +104,7 @@
         /* ===== HEADER ===== */
         .header-badge {
             display: inline-block;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            background: linear-gradient(135deg, #E8A800, #F7C948);
             color: white;
             padding: 6px 20px;
             border-radius: 20px;
@@ -140,8 +132,8 @@
 
         /* ===== INTRO CARD ===== */
         .intro-card {
-            background: linear-gradient(145deg, rgba(30, 30, 60, 0.8), rgba(20, 20, 45, 0.9));
-            border: 1px solid rgba(80, 80, 140, 0.2);
+            background: linear-gradient(145deg, rgba(13, 18, 32, 0.85), rgba(10, 14, 26, 0.95));
+            border: 1px solid rgba(232, 168, 0, 0.12);
             border-radius: 16px;
             padding: 40px 32px;
             margin-bottom: 24px;
@@ -179,7 +171,7 @@
         .stat .num {
             font-size: 1.6rem;
             font-weight: 700;
-            color: #818cf8;
+            color: #E8A800;
         }
 
         .stat .label {
@@ -212,8 +204,8 @@
             width: 100%;
             max-width: 420px;
             padding: 16px 32px;
-            background: linear-gradient(135deg, #4f46e5, #6366f1);
-            color: white;
+            background: #E8A800;
+            color: #0a0e1a;
             border: none;
             border-radius: 12px;
             font-size: 16px;
@@ -223,13 +215,13 @@
             text-decoration: none;
             text-align: center;
             margin-top: 16px;
-            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.25);
+            box-shadow: 0 4px 20px rgba(232, 168, 0, 0.20);
         }
 
         .cta-primary:hover {
-            background: linear-gradient(135deg, #4338ca, #4f46e5);
+            background: #B87800;
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(79, 70, 229, 0.35);
+            box-shadow: 0 8px 30px rgba(232, 168, 0, 0.30);
         }
 
         .trust-badge {
@@ -253,7 +245,7 @@
         .progress-label {
             font-size: 14px;
             font-weight: 600;
-            color: #818cf8;
+            color: #E8A800;
         }
 
         .progress-time {
@@ -264,7 +256,7 @@
         .progress-track {
             width: 100%;
             height: 4px;
-            background: rgba(80, 80, 140, 0.2);
+            background: rgba(232, 168, 0, 0.12);
             border-radius: 2px;
             margin-bottom: 24px;
             overflow: hidden;
@@ -272,14 +264,14 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4f46e5, #818cf8);
+            background: linear-gradient(90deg, #E8A800, #F7C948);
             border-radius: 2px;
             transition: width 0.4s ease;
         }
 
         .question-card {
-            background: linear-gradient(145deg, rgba(30, 30, 60, 0.8), rgba(20, 20, 45, 0.9));
-            border: 1px solid rgba(80, 80, 140, 0.2);
+            background: linear-gradient(145deg, rgba(13, 18, 32, 0.85), rgba(10, 14, 26, 0.95));
+            border: 1px solid rgba(232, 168, 0, 0.12);
             border-radius: 16px;
             padding: 32px 28px;
             text-align: left;
@@ -288,7 +280,7 @@
         .question-number {
             font-size: 12px;
             font-weight: 600;
-            color: #818cf8;
+            color: #E8A800;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 12px;
@@ -319,8 +311,8 @@
             align-items: center;
             gap: 14px;
             padding: 16px 18px;
-            background: rgba(20, 20, 45, 0.6);
-            border: 1px solid rgba(80, 80, 140, 0.15);
+            background: rgba(13, 18, 32, 0.7);
+            border: 1px solid rgba(232, 168, 0, 0.10);
             border-radius: 12px;
             color: #c0c0d8;
             font-size: 14px;
@@ -331,13 +323,13 @@
         }
 
         .option-btn:hover {
-            background: rgba(79, 70, 229, 0.15);
-            border-color: rgba(79, 70, 229, 0.3);
+            background: rgba(232, 168, 0, 0.12);
+            border-color: rgba(232, 168, 0, 0.25);
         }
 
         .option-btn.selected {
-            background: rgba(79, 70, 229, 0.25);
-            border-color: #4f46e5;
+            background: rgba(232, 168, 0, 0.20);
+            border-color: #E8A800;
             color: white;
         }
 
@@ -348,15 +340,15 @@
             width: 32px;
             height: 32px;
             border-radius: 8px;
-            background: rgba(79, 70, 229, 0.2);
-            color: #818cf8;
+            background: rgba(232, 168, 0, 0.15);
+            color: #E8A800;
             font-weight: 700;
             font-size: 13px;
             flex-shrink: 0;
         }
 
         .option-btn.selected .option-letter {
-            background: #4f46e5;
+            background: #E8A800;
             color: white;
         }
 
@@ -373,8 +365,8 @@
         }
 
         .email-card {
-            background: linear-gradient(145deg, rgba(30, 30, 60, 0.8), rgba(20, 20, 45, 0.9));
-            border: 1px solid rgba(80, 80, 140, 0.2);
+            background: linear-gradient(145deg, rgba(13, 18, 32, 0.85), rgba(10, 14, 26, 0.95));
+            border: 1px solid rgba(232, 168, 0, 0.12);
             border-radius: 16px;
             padding: 40px 32px;
         }
@@ -402,8 +394,8 @@
             max-width: 380px;
             margin: 0 auto 12px;
             padding: 14px 18px;
-            background: rgba(15, 15, 35, 0.8);
-            border: 1px solid rgba(80, 80, 140, 0.2);
+            background: rgba(10, 14, 26, 0.85);
+            border: 1px solid rgba(232, 168, 0, 0.12);
             border-radius: 10px;
             color: white;
             font-size: 15px;
@@ -418,8 +410,8 @@
         }
 
         .email-input:focus {
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            border-color: #E8A800;
+            box-shadow: 0 0 0 3px rgba(232, 168, 0, 0.08);
         }
 
         /* ===== LOADING ===== */
@@ -436,15 +428,15 @@
 
         .loading-text {
             font-size: 15px;
-            color: #818cf8;
+            color: #E8A800;
             margin-top: 20px;
         }
 
         .spinner {
             width: 40px;
             height: 40px;
-            border: 3px solid rgba(79, 70, 229, 0.2);
-            border-top-color: #4f46e5;
+            border: 3px solid rgba(232, 168, 0, 0.15);
+            border-top-color: #E8A800;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             margin: 0 auto;
@@ -467,8 +459,8 @@
         }
 
         .result-card {
-            background: linear-gradient(145deg, rgba(30, 30, 60, 0.8), rgba(20, 20, 45, 0.9));
-            border: 1px solid rgba(80, 80, 140, 0.2);
+            background: linear-gradient(145deg, rgba(13, 18, 32, 0.85), rgba(10, 14, 26, 0.95));
+            border: 1px solid rgba(232, 168, 0, 0.12);
             border-radius: 16px;
             padding: 40px 32px;
             text-align: center;
@@ -496,9 +488,9 @@
         }
 
         .profile-scale .result-profile-badge {
-            background: rgba(79, 70, 229, 0.15);
-            color: #818cf8;
-            border: 1px solid rgba(79, 70, 229, 0.3);
+            background: rgba(232, 168, 0, 0.12);
+            color: #E8A800;
+            border: 1px solid rgba(232, 168, 0, 0.25);
         }
 
         .result-card h2 {
@@ -518,11 +510,11 @@
             width: 36px;
             height: 6px;
             border-radius: 3px;
-            background: rgba(80, 80, 140, 0.2);
+            background: rgba(232, 168, 0, 0.12);
         }
 
         .score-dot.filled {
-            background: linear-gradient(90deg, #4f46e5, #818cf8);
+            background: linear-gradient(90deg, #E8A800, #F7C948);
         }
 
         .result-description {
@@ -533,8 +525,8 @@
         }
 
         .result-items {
-            background: rgba(15, 15, 35, 0.5);
-            border: 1px solid rgba(80, 80, 140, 0.1);
+            background: rgba(10, 14, 26, 0.5);
+            border: 1px solid rgba(232, 168, 0, 0.08);
             border-radius: 12px;
             padding: 24px;
             text-align: left;
@@ -579,17 +571,17 @@
             display: block;
             margin-top: 20px;
             padding: 14px 24px;
-            background: rgba(79, 70, 229, 0.1);
-            border: 1px solid rgba(79, 70, 229, 0.2);
+            background: rgba(232, 168, 0, 0.08);
+            border: 1px solid rgba(232, 168, 0, 0.15);
             border-radius: 10px;
-            color: #818cf8;
+            color: #E8A800;
             font-size: 14px;
             text-decoration: none;
             transition: all 0.2s;
         }
 
         .guide-link:hover {
-            background: rgba(79, 70, 229, 0.2);
+            background: rgba(232, 168, 0, 0.15);
             border-color: rgba(79, 70, 229, 0.4);
         }
 
@@ -611,8 +603,7 @@
     <!-- ===== BRAND HEADER ===== -->
     <header class="brand-header">
         <a href="https://speed-ecom.com" class="brand-logo" target="_blank">
-            <div class="brand-logo-icon">📊</div>
-            <div class="brand-logo-text">Ecom<span>Sphere</span></div>
+            <img src="logo-speed-ecom.png" alt="Speed Ecom" class="brand-logo-img">
         </a>
     </header>
 
