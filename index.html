@@ -672,21 +672,21 @@
             <div class="email-card">
                 <div class="icon">🎯</div>
                 <h2>Ton diagnostic est prêt !</h2>
-                <p>Entre ton prénom et ton email pour découvrir ton profil, ton score détaillé et ton plan d'action personnalisé.</p>
+                <p>Entre ton email et ton prénom pour découvrir ton profil, ton score détaillé et ton plan d'action personnalisé.</p>
 
+                <input
+                    type="email"
+                    id="user-email"
+                    class="email-input"
+                    placeholder="Ton meilleur email"
+                    autocomplete="email"
+                >
                 <input
                     type="text"
                     id="user-firstname"
                     class="email-input"
                     placeholder="Ton prénom"
                     autocomplete="given-name"
-                >
-                <input
-                    type="email"
-                    id="user-email"
-                    class="email-input"
-                    placeholder="Ton email"
-                    autocomplete="email"
                 >
                 <button class="cta-primary" onclick="submitEmail()">Voir mon résultat →</button>
                 <div class="trust-badge">🔒 Tes données restent privées. Zéro spam, promis.</div>
