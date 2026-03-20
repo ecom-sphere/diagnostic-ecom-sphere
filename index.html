@@ -744,6 +744,70 @@
     </div>
 
     <script>
+        // ===== TRACKING =====
+        const TRACK_URL = 'https://systeme.speed-ecom.eu/api/leads/track';
+
+        // Session ID persistant pour lier les events d'une même visite
+        let trackSessionId = sessionStorage.getItem('se_sid') || null;
+        if (!trackSessionId) {
+            trackSessionId = Math.random().toString(36).slice(2) + Date.now().toString(36);
+            sessionStorage.setItem('se_sid', trackSessionId);
+        }
+        let trackEmail   = null;      // rempli quand l'utilisateur soumet son email
+        let pendingEvents = [];       // buffer des events avant que l'email soit connu
+        let quizAbandoned = false;    // évite le double-fire
+
+        function track(event, data) {
+            const payload = {
+                event,
+                data: data || {},
+                session_id: trackSessionId,
+                source: 'diagnostic-quiz',
+            };
+            if (trackEmail) {
+                payload.email = trackEmail;
+                fetch(TRACK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                    keepalive: true
+                }).catch(() => {});
+            } else {
+                pendingEvents.push(payload);
+            }
+        }
+
+        function flushTrack(email) {
+            trackEmail = email;
+            pendingEvents.forEach(p => {
+                fetch(TRACK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(Object.assign({}, p, { email })),
+                    keepalive: true
+                }).catch(() => {});
+            });
+            pendingEvents = [];
+        }
+
+        // Abandon : si le user quitte avant d'avoir soumis son email
+        window.addEventListener('beforeunload', function() {
+            if (quizAbandoned) return;
+            if (currentQuestion > 0 && currentQuestion <= questions.length) {
+                // Essai de récupérer l'email du champ si affiché
+                var emailEl = document.getElementById('user-email');
+                var mail = emailEl ? emailEl.value.trim() : '';
+                if (mail && mail.includes('@') && !trackEmail) flushTrack(mail);
+                if (trackEmail) {
+                    quizAbandoned = true;
+                    track('quiz_abandoned', {
+                        last_step: currentQuestion,
+                        total_steps: questions.length,
+                        score_so_far: totalScore
+                    });
+                }
+            }
+        });
         // ===== QUIZ DATA =====
         const questions = [
             {
@@ -840,6 +904,7 @@
         function startQuiz() {
             document.getElementById('intro-section').style.display = 'none';
             document.getElementById('quiz-section').style.display = 'block';
+            track('quiz_started', { total_questions: questions.length });
             renderQuestion();
         }
 
@@ -870,8 +935,19 @@
             const btns = document.querySelectorAll('.option-btn');
             btns.forEach(b => b.classList.remove('selected'));
             btns[index].classList.add('selected');
+            const q = questions[currentQuestion];
             answers.push(points);
             totalScore += points;
+            // Track la réponse
+            track('quiz_answer', {
+                question_id:   q.id,
+                question_text: q.question,
+                answer_index:  index,
+                answer_text:   q.options[index].text,
+                answer_points: points,
+                step:          currentQuestion + 1,
+                total_steps:   questions.length
+            });
             setTimeout(() => {
                 currentQuestion++;
                 if (currentQuestion < questions.length) {
@@ -885,6 +961,12 @@
         function showEmailCapture() {
             document.getElementById('quiz-section').style.display = 'none';
             document.getElementById('email-section').classList.add('active');
+            // Quiz entièrement répondu (avant saisie email)
+            track('quiz_completed', {
+                score:       totalScore,
+                profil:      getProfile().id,
+                total_steps: questions.length
+            });
         }
 
         function submitEmail() {
@@ -907,8 +989,16 @@
             document.getElementById('email-section').style.display = 'none';
             document.getElementById('loading-section').classList.add('active');
 
-            // Envoi du contact via Netlify Function (proxy sécurisé)
+            // Flush tous les events en attente maintenant qu'on a l'email
+            flushTrack(email);
             const profileData = getProfile();
+            // Track la soumission email avec toutes les infos du profil
+            track('quiz_completed', {
+                score:     totalScore,
+                profil:    profileData.id,
+                firstname: firstname,
+                with_email: true
+            });
             const tagMap = {
                 'starter': 'quiz-explorateur',
                 'ready': 'quiz-pret-a-lancer',
@@ -1003,7 +1093,8 @@
                 </div>`
             ).join('');
             const guideLink = `
-                <a href="https://drive.google.com/file/d/13xNvqW0NnAOq20b7I1vtdFPVAHc0fzm6/view?usp=sharing" class="guide-link" target="_blank">
+                <a href="https://drive.google.com/file/d/13xNvqW0NnAOq20b7I1vtdFPVAHc0fzm6/view?usp=sharing" class="guide-link" target="_blank"
+                    onclick="track('lead_magnet_downloaded', { source: 'quiz-result-guide', profil: '${profile.id}' })">
                     📖 Tu n'as pas encore lu le guide gratuit ? Télécharge-le ici
                 </a>
             `;
@@ -1017,7 +1108,8 @@
                         <h3>Ce que le diagnostic révèle</h3>
                         ${itemsHTML}
                     </div>
-                    <a href="${profile.cta_link}" class="cta-primary" target="_blank">
+                    <a href="${profile.cta_link}" class="cta-primary" target="_blank"
+                        onclick="track('${profile.id === 'starter' ? 'skool_clicked' : 'calendly_clicked'}', { profil: '${profile.id}', source: 'quiz-result-cta' })">
                         ${profile.cta_text} →
                     </a>
                     <div style="font-size: 13px; color: #6a6a82; margin-top: 12px;">${profile.cta_sub}</div>
