@@ -614,6 +614,21 @@
             }
         }
     </style>
+  <!-- Calendly inline widget -->
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <style>
+    .calendly-wrap {
+      margin-top: 20px; border-radius: 12px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .calendly-inline-widget {
+      min-width: 280px;
+      height: 660px;
+    }
+    @media (max-width: 600px) {
+      .calendly-inline-widget { height: 580px; }
+    }
+  </style>
 </head>
 <body>
     <!-- Ambient glow element -->
@@ -754,6 +769,7 @@
             sessionStorage.setItem('se_sid', trackSessionId);
         }
         let trackEmail   = null;      // rempli quand l'utilisateur soumet son email
+        let userEmail    = null;      // email utilisateur pour prefill Calendly
         let pendingEvents = [];       // buffer des events avant que l'email soit connu
         let quizAbandoned = false;    // évite le double-fire
 
@@ -990,6 +1006,7 @@
             document.getElementById('loading-section').classList.add('active');
 
             // Flush tous les events en attente maintenant qu'on a l'email
+            userEmail = email;
             flushTrack(email);
             const profileData = getProfile();
             // Track la soumission email avec toutes les infos du profil
@@ -1021,7 +1038,7 @@
             setTimeout(() => {
                 document.getElementById('loading-section').classList.remove('active');
                 document.getElementById('loading-section').style.display = 'none';
-                showResult(firstname);
+                showResult(firstname, email);
             }, 2200);
         }
 
@@ -1040,7 +1057,7 @@
                         "Le contenu organique est un levier que tu n'exploites pas encore"
                     ],
                     cta_text: "Rejoindre la communauté Ecom Sphere",
-                    cta_link: "https://www.skool.com/ecomsphere",
+                    cta_link: "https://speed-ecom.eu/checkout/skool/",
                     cta_sub: "Gratuit pour démarrer, tu pourras poser tes questions et avancer pas à pas.",
                     dots_filled: 2
                 };
@@ -1081,7 +1098,7 @@
             }
         }
 
-        function showResult(firstname) {
+        function showResult(firstname, email) {
             const profile = getProfile();
             const dotsHTML = Array(7).fill(0).map((_, i) =>
                 `<div class="score-dot ${i < profile.dots_filled ? 'filled' : ''}"></div>`
@@ -1108,11 +1125,19 @@
                         <h3>Ce que le diagnostic révèle</h3>
                         ${itemsHTML}
                     </div>
-                    <a href="${profile.cta_link}" class="cta-primary" target="_blank"
-                        onclick="track('${profile.id === 'starter' ? 'skool_clicked' : 'calendly_clicked'}', { profil: '${profile.id}', source: 'quiz-result-cta' })">
-                        ${profile.cta_text} →
-                    </a>
-                    <div style="font-size: 13px; color: #6a6a82; margin-top: 12px;">${profile.cta_sub}</div>
+                    ${profile.id === 'starter' ? `
+                      <a href="${profile.cta_link}" class="cta-primary"
+                          onclick="track('skool_clicked', { profil: '${profile.id}', source: 'quiz-result-cta' })">
+                          ${profile.cta_text} →
+                      </a>
+                      <div style="font-size: 13px; color: #6a6a82; margin-top: 12px;">${profile.cta_sub}</div>
+                    ` : `
+                      <p style="font-size: 0.9rem; color: #c8b46a; font-weight: 600; margin-bottom: 12px;">${profile.cta_text}</p>
+                      <div class="calendly-wrap">
+                        <div id="calendly-inline-embed" class="calendly-inline-widget" data-url="https://calendly.com/frederic-gangloff/appel-de-candidature-pour-systeme-sphere-clone?hide_gdpr_banner=1&primary_color=e8a800&text_color=ffffff&background_color=0f1629"></div>
+                      </div>
+                      <div style="font-size: 13px; color: #6a6a82; margin-top: 10px;">${profile.cta_sub}</div>
+                    `}
                     ${guideLink}
                     <div class="trust-line">
                         <span>🏆</span> +200 e-commerçants accompagnés par Cédric Anger
@@ -1121,6 +1146,17 @@
             `;
             document.getElementById('result-section').innerHTML = html;
             document.getElementById('result-section').classList.add('active');
+            // Init Calendly inline widget with prefill for ready/scale profiles
+            if (profile.id !== 'starter') {
+                var embedEl = document.getElementById('calendly-inline-embed');
+                if (embedEl && window.Calendly) {
+                    Calendly.initInlineWidget({
+                        url: 'https://calendly.com/frederic-gangloff/appel-de-candidature-pour-systeme-sphere-clone?hide_gdpr_banner=1&primary_color=e8a800&text_color=ffffff&background_color=0f1629',
+                        parentElement: embedEl,
+                        prefill: { name: firstname, email: email || userEmail || '' }
+                    });
+                }
+            }
         }
     </script>
 </body>
